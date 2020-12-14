@@ -319,7 +319,7 @@ rmarkovchain_alt <- function(n, transition.matrix.alt, start_alt) {
   rownames0 = rownames(transition.matrix.alt)
   return(rownames0[output_alt])
 }
-print(rmarkovchain(n = 10, transition.matrix.alt)) 
+print(rmarkovchain(n = 2, transition.matrix)) 
 
 
 
