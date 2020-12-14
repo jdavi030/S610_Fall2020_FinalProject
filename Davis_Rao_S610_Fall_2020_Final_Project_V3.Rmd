@@ -230,15 +230,21 @@ rmarkovchain <- function(n, transition.matrix, start) {
   output[1] <- start
   #select next word based on previous ("starting") word
   for (i in 2:n) {
-    output[i] <- 
-    sample(ncol(transition.matrix), 1, 
-           prob=transition.matrix[output[i - 1],])
-    }
-  rownames0 = rownames(transition.matrix)
-  return(rownames0[output])
-
+   output[i] <-  sample(ncol(transition.matrix), 1, 
+   prob=transition.matrix[output[i - 1],])
+  }
+  word_pred <- c(rownames0[start], colnames0[output[i]])
+return(word_pred)
 }
-print(rmarkovchain(n = 10, transition.matrix)) 
+print(rmarkovchain(n = 2, transition.matrix)) 
+ 
+
+##Code for Longer Word Chains##
+  #rownames0 = rownames(transition.matrix)
+  #return(rownames0[output])
+
+#}
+#print(rmarkovchain(n = 10, transition.matrix)) 
 ```
 # TESTING ON A SMALLER SAMPLE
 
@@ -281,13 +287,22 @@ output_test <- rep (NA, n)
 output_test[1] <- start_test
 #select next word based on previous ("starting") word
 for (i in 2:n) {
-output_test[i] <- sample(ncol(transition.matrix.test), 1, 
-prob=transition.matrix.test[output_test[i - 1],])
+ output_test[i] <- sample(ncol(transition.matrix.test), 1, 
+ prob=transition.matrix.test[output_test[i - 1],])
     }
-rownames0 = rownames(transition.matrix.test)
-  return(rownames0[output_test])
+  word_pred_test <- c(rownames0[start_test], colnames0[output_test[i]])
+return(word_pred_test)
 }
-print(rmarkovchain(n = 7, transition.matrix.test)) 
+print(rmarkovchain(n = 2, transition.matrix.test)) 
+
+
+## Code for Longer Word Chains ##
+#rownames0 = rownames(transition.matrix.test)
+  #return(rownames0[output_test])
+#}
+#print(rmarkovchain(n = 7, transition.matrix.test)) 
+
+
 ```
 
 #Appendix A: Markov Model with Stop Words Included
@@ -326,10 +341,16 @@ rmarkovchain_alt <- function(n, transition.matrix.alt, start_alt) {
     sample(ncol(transition.matrix.alt), 1, 
            prob=transition.matrix.alt[output_alt[i - 1],])
     }
-  rownames0 = rownames(transition.matrix.alt)
-  return(rownames0[output_alt])
+  word_pred_alt <- c(rownames0[start_alt], colnames0[output_alt[i]])
+return(word_pred_alt)
 }
-print(rmarkovchain(n = 10, transition.matrix.alt)) 
+print(rmarkovchain(n = 2, transition.matrix)) 
+
+##Code for Longer Word Chains##
+  #rownames0 = rownames(transition.matrix.alt)
+  #return(rownames0[output_alt])
+#}
+#print(rmarkovchain(n = 10, transition.matrix.alt)) 
 
 
 
