@@ -77,7 +77,11 @@ tidy_loud %>%
   mutate(word = reorder(word, n)) %>%
   ggplot(aes(n, word)) +
   geom_col() +
-  labs(y = NULL)
+  xlab("Frequency of Words Used in the Loud Album") + 
+  ylab("Words") +
+  labs(title = "Figure 1: Freuquency of Words in Loud Album with Stop Words Included")  
+ 
+ggsave("figure1_final.jpeg", width = 10, height = 7)
 
 library(ggplot2)
 
@@ -87,9 +91,12 @@ tidy_loud_stop %>%
   mutate(word = reorder(word, n)) %>%
   ggplot(aes(n, word)) +
   geom_col() +
-  labs(y = NULL)
+  xlab("Frequency of Words Used in the Loud Album") + 
+  ylab("Words") +
+  labs(title = "Figure 2: Freuquency of Words in Loud Album with Stop Words Excluded") + 
+ 
+ggsave("figure2_final.jpeg", width = 10, height = 7)
 
-#Question for Fukuyama: Is there a way to plot this with words on y axis and songs on the x axis to see which words appear in which song?
 
 ```
 ##Word clloud to show frequency of words 
@@ -100,7 +107,8 @@ tidy_loud %>%
   anti_join(stop_words) %>%
   count(word) %>%
   with(wordcloud(word, n, max.words = 100))
-
+dev.copy(png,'Final_Fig_3.png')
+dev.off()
 ```
 After exploring the word frequency we see that despite the between the data with stop words and the one without. The data without the stop words fared better. The words included in the frequency plots were more telling of the language used in the album than the data with the stop words.So for the sentiment analysis and adjusted frequency we will be using the data with the stop words remover "tidy_loud_stop"
 
@@ -319,7 +327,7 @@ rmarkovchain_alt <- function(n, transition.matrix.alt, start_alt) {
   rownames0 = rownames(transition.matrix.alt)
   return(rownames0[output_alt])
 }
-print(rmarkovchain(n = 2, transition.matrix)) 
+print(rmarkovchain(n = 10, transition.matrix.alt)) 
 
 
 
